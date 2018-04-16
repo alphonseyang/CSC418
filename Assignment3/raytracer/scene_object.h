@@ -18,7 +18,7 @@
 class SceneObject {
 public:
 	// Returns true if an intersection occured, false otherwise.
-	virtual bool intersect(Ray3D&, const Matrix4x4&, const Matrix4x4&) = 0;
+	virtual bool intersect(Ray3D&, const Matrix4x4&, const Matrix4x4&, Material* mat) = 0;
 	virtual ~SceneObject() {}
 };
 
@@ -68,12 +68,23 @@ typedef std::vector<SceneNode*> Scene;
 class UnitSquare : public SceneObject {
 public:
 	bool intersect(Ray3D& ray, const Matrix4x4& worldToModel, 
-				const Matrix4x4& modelToWorld);
+				const Matrix4x4& modelToWorld, Material* mat);
 };
 
 class UnitSphere : public SceneObject {
 public:
 	bool intersect(Ray3D& ray, const Matrix4x4& worldToModel, 
-				const Matrix4x4& modelToWorld);
+				const Matrix4x4& modelToWorld, Material* mat);
 };
 
+class UnitCylinder : public SceneObject{
+public:
+    bool intersect(Ray3D& ray, const Matrix4x4& worldToModel,
+                   const Matrix4x4& modelToWorld, Material* mat);
+};
+
+class UnitCube : public SceneObject{
+public:
+    bool intersect(Ray3D& ray, const Matrix4x4& worldToModel,
+                   const Matrix4x4& modelToWorld, Material* mat);
+};
